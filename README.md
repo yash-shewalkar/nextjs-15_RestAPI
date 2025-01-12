@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# API Documentation
 
-## Getting Started
+This document provides an overview of the available endpoints for the API, along with their respective usage. **Note:** Bearer tokens are required for all endpoints in the `/blogs` section.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Blogs API
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. Get Blogs
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Endpoint:** `GET /blogs`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/blogs?categoryId=<CATEGORY_ID>&userId=<USER_ID>`
+- **Description:** Fetch all blogs for a specific category and user.
+- **Headers:**
+  - `Authorization`: Bearer `<TOKEN>`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Create Blog
 
-## Learn More
+- **Endpoint:** `POST /blogs`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/blogs?categoryId=<CATEGORY_ID>&userId=<USER_ID>`
+- **Description:** Create a new blog.
+- **Headers:**
+  - `Authorization`: Bearer `<TOKEN>`
+- **Request Body:**
+  ```json
+  {
+      "title": "This is a blog title",
+      "description": "This is the blog content."
+  }
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Get Single Blog
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Endpoint:** `GET /blogs/:blogId`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/blogs/<BLOG_ID>?categoryId=<CATEGORY_ID>&userId=<USER_ID>`
+- **Description:** Fetch details of a single blog.
+- **Headers:**
+  - `Authorization`: Bearer `<TOKEN>`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Update Blog
 
-## Deploy on Vercel
+- **Endpoint:** `PATCH /blogs/:blogId`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/blogs/<BLOG_ID>?userId=<USER_ID>`
+- **Description:** Update an existing blog.
+- **Headers:**
+  - `Authorization`: Bearer `<TOKEN>`
+- **Request Body:**
+  ```json
+  {
+      "title": "Updated blog title",
+      "description": "Updated blog description."
+  }
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Delete Blog
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Endpoint:** `DELETE /blogs/:blogId`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/blogs/<BLOG_ID>?userId=<USER_ID>`
+- **Description:** Delete a blog.
+- **Headers:**
+  - `Authorization`: Bearer `<TOKEN>`
+
+---
+
+## Categories API
+
+### 1. Get Categories
+
+- **Endpoint:** `GET /categories`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/categories?userId=<USER_ID>`
+- **Description:** Fetch all categories for a specific user.
+
+### 2. Create Category
+
+- **Endpoint:** `POST /categories`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/categories?userId=<USER_ID>`
+- **Description:** Create a new category.
+- **Request Body:**
+  ```json
+  {
+      "title": "New Category Title"
+  }
+  ```
+
+### 3. Update Category
+
+- **Endpoint:** `PATCH /categories/:categoryId`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/categories/<CATEGORY_ID>?userId=<USER_ID>`
+- **Description:** Update an existing category.
+- **Request Body:**
+  ```json
+  {
+      "title": "Updated Category Title"
+  }
+  ```
+
+### 4. Delete Category
+
+- **Endpoint:** `DELETE /categories/:categoryId`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/categories/<CATEGORY_ID>?userId=<USER_ID>`
+- **Description:** Delete a category.
+
+---
+
+## User API
+
+### 1. Get User
+
+- **Endpoint:** `GET /user`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/user`
+- **Description:** Fetch user details.
+
+### 2. Create User
+
+- **Endpoint:** `POST /user`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/user`
+- **Description:** Create a new user.
+- **Request Body:**
+  ```json
+  {
+      "email": "user@example.com",
+      "name": "User Name",
+      "password": "userpassword"
+  }
+  ```
+
+### 3. Update User
+
+- **Endpoint:** `PATCH /user`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/user`
+- **Description:** Update user details.
+- **Request Body:**
+  ```json
+  {
+      "userId": "<USER_ID>",
+      "newUsername": "Updated User Name"
+  }
+  ```
+
+### 4. Delete User
+
+- **Endpoint:** `DELETE /user`
+- **URL:** `https://nextjs-15-rest-api.vercel.app/api/user?userId=<USER_ID>`
+- **Description:** Delete a user.
+
+---
+
+## Notes
+
+- **Authentication:** Bearer tokens are mandatory for all `/blogs` endpoints. Example:
+  ```
+  Authorization: Bearer jsdkeid23ijk23232km432km
+  ```
+- Replace `<CATEGORY_ID>`, `<USER_ID>`, `<BLOG_ID>`, and `<TOKEN>` with actual values when making API requests.
+- Use tools like Postman or cURL to test these endpoints.
